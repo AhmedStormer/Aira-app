@@ -85,13 +85,25 @@ export default function AIRAInterface() {
         <CardContent className="h-[500px] overflow-y-auto space-y-2 p-4">
           {messages.map((msg, idx) => (
             <div
-              key={idx}
-              className={
-                msg.from_user
-                  ? "rounded-xl px-4 py-2 max-w-[75%] relative bg-pink-500 ml-auto"
-                  : "rounded-xl px-4 py-2 max-w-[75%] relative bg-white/10 text-white"
-              }
-              {msg.text}
+  key={idx}
+  className={
+    msg.from_user
+      ? "rounded-xl px-4 py-2 max-w-[75%] relative bg-pink-500 ml-auto"
+      : "rounded-xl px-4 py-2 max-w-[75%] relative bg-white/10 text-white"
+  }
+>
+  {msg.text}
+  {!msg.from_user && (
+    <Button
+      size="icon"
+      className="absolute top-1 right-1"
+      variant="ghost"
+      onClick={() => playVoice(msg.text)}
+    >
+      <Volume2 className="w-4 h-4" />
+    </Button>
+  )}
+</div>
               {!msg.from_user && (
                 <Button
                   size="icon"
