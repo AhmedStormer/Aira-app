@@ -86,8 +86,11 @@ export default function AIRAInterface() {
           {messages.map((msg, idx) => (
             <div
               key={idx}
-              className={\`rounded-xl px-4 py-2 max-w-[75%] relative \${msg.from_user ? "bg-pink-500 ml-auto" : "bg-white/10 text-white"}\`}
-            >
+              className={
+                msg.from_user
+                  ? "rounded-xl px-4 py-2 max-w-[75%] relative bg-pink-500 ml-auto"
+                  : "rounded-xl px-4 py-2 max-w-[75%] relative bg-white/10 text-white"
+              }
               {msg.text}
               {!msg.from_user && (
                 <Button
