@@ -82,27 +82,29 @@ export default function AIRAInterface() {
       <Card className="bg-gradient-to-b from-black to-gray-900 text-white">
         <CardContent className="h-[500px] overflow-y-auto space-y-2 p-4">
   {messages.map((msg, idx) => (
-  <div
-    key={idx}
-    className={
-      msg.from_user
-        ? "rounded-xl px-4 py-2 max-w-[75%] relative bg-pink-500 ml-auto"
-        : "rounded-xl px-4 py-2 max-w-[75%] relative bg-white/10 text-white"
-    }
-  > {/* ✅ This `>` was the missing piece causing build crash */}
-    {msg.text}
-    {!msg.from_user && (
-      <Button
-        size="icon"
-        className="absolute top-1 right-1"
-        variant="ghost"
-        onClick={() => playVoice(msg.text)}
-      >
-        <Volume2 className="w-4 h-4" />
-      </Button>
-    )}
-  </div>
-  ))}
+  {messages.map((msg, idx) => {
+  const isUser = msg.from_user;
+  return (
+    <div
+      key={idx}
+      className={`rounded-xl px-4 py-2 max-w-[75%] relative ${
+        isUser ? "bg-pink-500 ml-auto" : "bg-white/10 text-white"
+      }`}
+    >
+      {msg.text}
+      {!isUser && (
+        <Button
+          size="icon"
+          className="absolute top-1 right-1"
+          variant="ghost"
+          onClick={() => playVoice(msg.text)}
+        >
+          <Volume2 className="w-4 h-4" />
+        </Button>
+      )}
+    </div>
+  );
+})}
 </CardContent>
         <div className="flex gap-2 p-4 items-center">
           <Input
